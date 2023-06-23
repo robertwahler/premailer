@@ -190,7 +190,7 @@ class Premailer
 
         # Default encoding is ASCII-8BIT (binary) per http://groups.google.com/group/nokogiri-talk/msg/0b81ef0dc180dc74
         if thing.is_a?(String) and RUBY_VERSION =~ /1.9/
-          thing = thing.force_encoding('ASCII-8BIT').encode!
+          thing = thing.force_encoding('UTF-8').encode! # force UTF-8 handling in delivered email
           doc = ::Nokogiri::HTML(thing) {|c| c.recover }
         else
           doc = ::Nokogiri::HTML(thing, nil, @options[:inputencoding] || 'BINARY') {|c| c.recover }
